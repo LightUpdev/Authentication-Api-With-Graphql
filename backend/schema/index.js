@@ -13,6 +13,6 @@ export const userType = new GraphQLObjectType({
     email: { type: GraphQLNonNull(GraphQLString) },
     password: { type: GraphQLNonNull(GraphQLString) },
     username: { type: GraphQLNonNull(GraphQLString) },
-    phone_number: { type: GraphQLNonNull(GraphQLString) },
+    phoneNumber: { type: GraphQLNonNull(GraphQLString) },
   }),
 });
