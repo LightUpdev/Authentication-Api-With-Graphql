@@ -1,0 +1,51 @@
+.container {
+  padding: 15px 10px;
+  margin: auto auto;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  justify-content: center;
+  margin: auto auto;
+}
+.menu-action {
+  margin: 2rem;
+}
+
+.menu-action button {
+  padding: 10px;
+  background-color: orange;
+  border: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.app-header {
+  font-size: 1.8rem;
+  align-self: center;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+input {
+  padding: 10px;
+  margin: 0 0 5px 0;
+}
+form button {
+  padding: 10px;
+  margin: 15px 0;
+  background-color: orange;
+  border: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+label {
+  margin: 5px 0 0 0;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
