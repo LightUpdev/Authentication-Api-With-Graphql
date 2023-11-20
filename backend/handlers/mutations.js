@@ -13,9 +13,9 @@ export const mutations = new GraphQLObjectType({
         email: { type: GraphQLNonNull(GraphQLString) },
         password: { type: GraphQLNonNull(GraphQLString) },
         username: { type: GraphQLNonNull(GraphQLString) },
-        phone_number: { type: GraphQLNonNull(GraphQLString) },
+        phoneNumber: { type: GraphQLNonNull(GraphQLString) },
       },
-      async resolve(parent, { name, email, password, username, phone_number }) {
+      async resolve(parent, { name, email, password, username, phoneNumber }) {
         try {
           // validate email
           const emailRegex = new RegExp(
@@ -29,7 +29,7 @@ export const mutations = new GraphQLObjectType({
 
           //   validate password
           let passwordRegex =
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{6,30}$/;
           const isValidPassword = passwordRegex.test(password);
 
           if (!isValidPassword) {
@@ -54,7 +54,7 @@ export const mutations = new GraphQLObjectType({
               email,
               password: encryptedPassword,
               username,
-              phone_number,
+              phoneNumber,
             });
             return await newUser.save();
           }
