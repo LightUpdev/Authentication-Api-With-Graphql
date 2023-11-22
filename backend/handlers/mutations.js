@@ -69,7 +69,7 @@ export const mutations = new GraphQLObjectType({
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
-      async resolve(parent, { email }) {
+      async resolve(parent, { email, password }) {
         try {
           // check if user exist
           const existingUser = await User.findOne({ email });
@@ -89,18 +89,23 @@ export const mutations = new GraphQLObjectType({
             process.env.SECRET_KEY
           );
           var originalText = decryptedPassword.toString(CryptoJS.enc.Utf8);
-          let regex =
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
-          const isValidPassword = regex.test(originalText);
-          if (!isValidPassword) {
-            return new Error(
-              "password must contain alphanumeric characters and symbols"
-            );
-          }
+          // check if password match with decrypted password
+          if (originalText === password) {
+            let regex =
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
+            const isValidPassword = regex.test(originalText);
 
-          if (isValidPassword && isValidEmail && decryptedPassword) {
-            const loginUser = await User.findOne({ email });
-            return loginUser;
+            if (!isValidPassword) {
+              return new Error(
+                "password must contain alphanumeric characters and symbols"
+              );
+            }
+            if (isValidPassword && isValidEmail && decryptedPassword) {
+              const loginUser = await User.findOne({ email });
+              return loginUser;
+            }
+          }else{
+            return new Error("Invalid password")
           }
         } catch (error) {
           return new Error(error);
