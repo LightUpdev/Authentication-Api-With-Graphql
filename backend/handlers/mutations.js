@@ -69,7 +69,7 @@ export const mutations = new GraphQLObjectType({
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
       },
-      async resolve(parent, { email, password }) {
+      async resolve(parent, { email }) {
         try {
           // check if user exist
           const existingUser = await User.findOne({ email });
@@ -103,7 +103,7 @@ export const mutations = new GraphQLObjectType({
             return loginUser;
           }
         } catch (error) {
-          throw new Error(error);
+          return new Error(error);
         }
       },
     },
