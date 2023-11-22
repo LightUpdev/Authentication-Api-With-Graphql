@@ -36,6 +36,7 @@ input {
 form button {
   padding: 10px;
   margin: 15px 0;
+  color: white;
   background-color: orange;
   border: 0;
   font-size: 1.2rem;
@@ -48,4 +49,11 @@ label {
   color: white;
   font-size: 16px;
   font-weight: 500;
+}
+.app-header {
+  font-size: 2rem;
+  font-weight: Bold;
+  word-spacing: 3px;
+  color: black;
+  text-shadow: 2px 2px 3px white, 2px 2px 3px white, 2px 2px 3px white;
 }
