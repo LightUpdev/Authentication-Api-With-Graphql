@@ -3,7 +3,9 @@ import Label from "./Label";
 import Input from "./Input";
 import Button from "./Button";
 import { useMutation } from "@apollo/client";
-import { SIGN_UP } from "../graphql/mutations";
+import { LOGIN, SIGN_UP } from "../graphql/mutations";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const Form = ({ formTitle, formStatus, formAction }) => {
   const [name, setName] = useState("");
@@ -13,29 +15,61 @@ const Form = ({ formTitle, formStatus, formAction }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [toggleLogin, setToggleLogin] = useState(true);
 
-  const [signUp, SignUpResponse] = useMutation(SIGN_UP);
+  const navigate = useNavigate();
 
-  console.log(SignUpResponse?.data?.signUp);
+  const [signUp] = useMutation(SIGN_UP);
+  const [login] = useMutation(LOGIN);
 
   const signUpFunc = async (e) => {
     e.preventDefault();
-    await signUp({
-      variables: { name, email, password, username, phoneNumber },
-    });
-    const user = SignUpResponse?.data?.signUp;
 
-    localStorage.setItem("User", JSON.stringify(user));
-    setEmail("");
-    setName("");
-    setPassword("");
-    setPhoneNumber("");
-    setUsername("");
+    try {
+      const res = await signUp({
+        variables: { name, email, password, username, phoneNumber },
+      });
+      if (res?.data) {
+        localStorage.setItem("User", JSON.stringify(res?.data?.signUp));
+        setEmail("");
+        setName("");
+        setPassword("");
+        setPhoneNumber("");
+        setUsername("");
+        setTimeout(() => {
+          toast.success(`welcome onboard ${res?.data.signUp?.name}`);
+          setTimeout(() => {
+            navigate("/welcome");
+          }, 5000);
+        }, 1000);
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
-  const loginFunc = () => {};
+  const loginFunc = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await login({
+        variables: { email, password },
+      });
+      console.log(res);
+
+      if (res?.data) {
+        toast.success("You are successfully logged in");
+        localStorage.setItem("User", JSON.stringify(res?.data?.login));
+        setTimeout(() => {
+          navigate("/welcome");
+        }, 5000);
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
 
   return (
     <>
+      <ToastContainer />
       <div className="container">
         <div className="menu-action">
           <Button
