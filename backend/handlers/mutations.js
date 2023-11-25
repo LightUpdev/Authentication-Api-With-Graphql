@@ -90,25 +90,29 @@ export const mutations = new GraphQLObjectType({
           );
           var originalText = decryptedPassword.toString(CryptoJS.enc.Utf8);
           // check if password match with decrypted password
-          if (originalText === password) {
-            let regex =
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
-            const isValidPassword = regex.test(originalText);
+          if (password) {
+            if (originalText === password) {
+              let regex =
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
+              const isValidPassword = regex.test(originalText);
 
-            if (!isValidPassword) {
-              return new Error(
-                "password must contain alphanumeric characters and symbols"
-              );
+              if (!isValidPassword) {
+                return new Error(
+                  "password must contain alphanumeric characters and symbols"
+                );
+              }
+              if (isValidPassword && isValidEmail && decryptedPassword) {
+                const loginUser = await User.findOne({ email });
+                return loginUser;
+              }
+            } else {
+              return new Error("incorrect email or password");
             }
-            if (isValidPassword && isValidEmail && decryptedPassword) {
-              const loginUser = await User.findOne({ email });
-              return loginUser;
-            }
-          }else{
-            return new Error("Invalid password")
+          } else {
+            return new Error("password is required");
           }
         } catch (error) {
-          return new Error(error);
+          return new Error("incorrect email or password");
         }
       },
     },

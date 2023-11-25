@@ -6,10 +6,5 @@ html {
 }
 body {
   height: 100vh;
-  background: linear-gradient(
-    3deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(121, 90, 9, 1) 41%,
-    rgba(0, 206, 255, 1) 100%
-  );
+ 
 }

@@ -1,6 +1,13 @@
-.container {
+.form-container {
   padding: 15px 10px;
+  height: 100vh;
   margin: auto auto;
+  background: linear-gradient(
+    3deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(121, 90, 9, 1) 41%,
+    rgba(0, 206, 255, 1) 100%
+  );
 }
 form {
   display: flex;
@@ -8,6 +15,7 @@ form {
   width: 25%;
   justify-content: center;
   margin: auto auto;
+  
 }
 .menu-action {
   margin: 2rem;
@@ -56,4 +64,8 @@ label {
   word-spacing: 3px;
   color: black;
   text-shadow: 2px 2px 3px white, 2px 2px 3px white, 2px 2px 3px white;
+}
+
+.welcome-page{
+
 }
