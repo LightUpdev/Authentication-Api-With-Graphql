@@ -22,27 +22,28 @@ const Form = ({ formTitle, formStatus, formAction }) => {
 
   const signUpFunc = async (e) => {
     e.preventDefault();
-
-    try {
-      const res = await signUp({
-        variables: { name, email, password, username, phoneNumber },
-      });
-      if (res?.data) {
-        localStorage.setItem("User", JSON.stringify(res?.data?.signUp));
-        setEmail("");
-        setName("");
-        setPassword("");
-        setPhoneNumber("");
-        setUsername("");
-        setTimeout(() => {
-          toast.success(`welcome onboard ${res?.data.signUp?.name}`);
+    if ((name, email, password, username, phoneNumber)) {
+      try {
+        const res = await signUp({
+          variables: { name, email, password, username, phoneNumber },
+        });
+        if (res?.data) {
+          localStorage.setItem("User", JSON.stringify(res?.data?.signUp));
+          setEmail("");
+          setName("");
+          setPassword("");
+          setPhoneNumber("");
+          setUsername("");
           setTimeout(() => {
-            navigate("/welcome");
-          }, 5000);
-        }, 1000);
+            toast.success(`welcome onboard ${res?.data.signUp?.name}`);
+            setTimeout(() => {
+              setToggleLogin(!toggleLogin);
+            }, 3000);
+          }, 1000);
+        }
+      } catch (err) {
+        toast.error(err.message);
       }
-    } catch (err) {
-      toast.error(err.message);
     }
   };
 
@@ -70,7 +71,7 @@ const Form = ({ formTitle, formStatus, formAction }) => {
   return (
     <>
       <ToastContainer />
-      <div className="container">
+      <div className="form-container">
         <div className="menu-action">
           <Button
             onClick={() => setToggleLogin(!toggleLogin)}
