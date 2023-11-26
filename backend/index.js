@@ -13,7 +13,7 @@ const app = express();
 app.use(cors());
 
 const schema = new GraphQLSchema({ query: RootQuery, mutation: mutations });
-app.use("/auth", graphqlHTTP({ schema, graphiql: true }));
+app.use("/auth", graphqlHTTP({ schema, graphiql: false }));
 
 const PORT = 5100 || process.env.PORT;
 
