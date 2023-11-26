@@ -1,7 +1,7 @@
 import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
 import { userType } from "../schema/index.js";
 import { User } from "../Model/index.js";
-import {} from 
+import CryptoJS from "crypto-js"; 
 
 export const mutations = new GraphQLObjectType({
   name: "mutations",
