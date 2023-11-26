@@ -53,7 +53,6 @@ const Form = ({ formTitle, formStatus, formAction }) => {
       const res = await login({
         variables: { email, password },
       });
-      console.log(res);
 
       if (res?.data) {
         toast.success("You are successfully logged in");
@@ -63,7 +62,6 @@ const Form = ({ formTitle, formStatus, formAction }) => {
         }, 5000);
       }
     } catch (err) {
-      console.log(err);
       toast.error(err.message);
     }
   };
@@ -80,7 +78,7 @@ const Form = ({ formTitle, formStatus, formAction }) => {
         </div>
 
         <h2 className="app-header">
-          {toggleLogin ? "Sign up to our Application" : "Login your account"}
+          {toggleLogin ? "Sign up to our App" : "Login"}
         </h2>
         <form>
           {toggleLogin ? (
