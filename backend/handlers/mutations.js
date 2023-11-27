@@ -38,7 +38,7 @@ export const mutations = new GraphQLObjectType({
             );
           }
           var encryptedPassword = CryptoJS.AES.encrypt(
-            password,
+            CryptoJS.enc.Utf8.parse(password),
             process.env.SECRET_KEY
           ).toString();
 
