@@ -7,7 +7,7 @@ import { LOGIN, SIGN_UP } from "../graphql/mutations";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
-const Form = ({ formTitle, formStatus, formAction }) => {
+const Form = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
