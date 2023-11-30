@@ -149,6 +149,7 @@ const Form = () => {
 
   return (
     <>
+      <ToastContainer />
       <div className="form-container">
         <div className="form-wrapper">
           <h2 className="app-header">
@@ -225,7 +226,9 @@ const Form = () => {
             ) : (
               <small>
                 Don't have an account ?
-                <span onClick={() => setToggleLogin(true)}>&nbsp; Register</span>
+                <span onClick={() => setToggleLogin(true)}>
+                  &nbsp; Register
+                </span>
               </small>
             )}
           </div>
