@@ -3,13 +3,14 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  padding: 30px 0;
+  padding: 15px 0;
   height: 100vh;
   margin: auto auto;
   background-image: url("../public/assets/form-bg-image.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
 }
 form {
   display: flex;
@@ -28,21 +29,6 @@ form {
   align-self: center;
   border-radius: 50px;
   background-color: black;
-}
-.menu-action {
-  margin: 5px 1.5rem;
-}
-
-.menu-action button {
-  padding: 5px;
-  background-color: orange;
-  border: 0;
-  color: white;
-  font-weight: 500;
-  font-size: 13px;
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
 }
 
 .app-header {
@@ -133,19 +119,15 @@ label {
   .app-header {
     font-size: 1.5rem;
   }
-  .menu-action button {
-    padding: 10px;
-    font-size: 1rem;
-    font-weight: bold;
-  }
   .welcome-page h1 {
     font-size: 2rem;
   }
   .form-container {
     display: flex;
+    height: 100vh;
     flex-wrap: wrap;
     flex-direction: column;
-    align-content: end;
+    align-content: flex-end;
     align-items: center;
   }
   .form-wrapper {
