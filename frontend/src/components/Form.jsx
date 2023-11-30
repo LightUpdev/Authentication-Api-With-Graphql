@@ -14,7 +14,7 @@ const Form = () => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [toggleLogin, setToggleLogin] = useState(false);
+  const [toggleLogin, setToggleLogin] = useState(true);
 
   const inputFormData = [
     {
