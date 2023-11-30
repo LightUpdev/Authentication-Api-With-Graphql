@@ -4,9 +4,11 @@ export const GET_USERS = gql`
   {
     users {
       id
-      name
+      firstName
+      lastName
       email
       username
+      phoneNumber
     }
   }
 `;
