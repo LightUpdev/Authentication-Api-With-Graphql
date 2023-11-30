@@ -8,12 +8,92 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 const Form = () => {
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [toggleLogin, setToggleLogin] = useState(true);
+  const [toggleLogin, setToggleLogin] = useState(false);
+
+  const inputFormData = [
+    {
+      id: 1,
+      inputName: "firstName",
+      labelName: "firstName",
+      label: "First Name",
+      inputType: "text",
+      required: true,
+      value: firstName,
+      onChange: (e) => {
+        setFirstName(e.target.value);
+      },
+    },
+    {
+      id: 2,
+      inputName: "lastName",
+      labelName: "lastName",
+      label: "Last Name",
+      inputType: "text",
+      required: true,
+      value: lastName,
+      onChange: (e) => {
+        setLastName(e.target.value);
+      },
+    },
+    {
+      id: 3,
+      inputName: "email",
+      labelName: "email",
+      inputType: "email",
+      label: "Email",
+      required: true,
+      value: email,
+      onChange: (e) => {
+        setEmail(e.target.value);
+      },
+    },
+    {
+      id: 4,
+      inputName: "password",
+      labelName: "password",
+      inputType: "password",
+      label: "Password",
+      required: true,
+      value: password,
+      onChange: (e) => {
+        setPassword(e.target.value);
+      },
+    },
+    {
+      id: 5,
+      inputName: "username",
+      labelName: "username",
+      inputType: "text",
+      label: "Username",
+      required: true,
+      value: username,
+      onChange: (e) => {
+        setUsername(e.target.value);
+      },
+    },
+    {
+      id: 6,
+      inputName: "phoneNumber",
+      labelName: "phoneNumber",
+      label: "Phone Number",
+      inputType: "text",
+      required: false,
+      value: phoneNumber,
+      onChange: (e) => {
+        setPhoneNumber(e.target.value);
+      },
+    },
+  ];
+
+  const loginFormData = inputFormData.filter(
+    (val) => val.inputName === "email" || val.inputName === "password"
+  );
 
   const navigate = useNavigate();
 
@@ -22,24 +102,27 @@ const Form = () => {
 
   const signUpFunc = async (e) => {
     e.preventDefault();
-    if ((name, email, password, username, phoneNumber)) {
+    if ((firstName, lastName, email, password, username, phoneNumber)) {
       try {
         const res = await signUp({
-          variables: { name, email, password, username, phoneNumber },
+          variables: {
+            firstName,
+            lastName,
+            email,
+            password,
+            username,
+            phoneNumber,
+          },
         });
         if (res?.data) {
           localStorage.setItem("User", JSON.stringify(res?.data?.signUp));
           setEmail("");
-          setName("");
+          setFirstName("");
+          setLastName("");
           setPassword("");
           setPhoneNumber("");
           setUsername("");
-          setTimeout(() => {
-            toast.success(`welcome onboard ${res?.data.signUp?.name}`);
-            setTimeout(() => {
-              setToggleLogin(!toggleLogin);
-            }, 3000);
-          }, 1000);
+          setToggleLogin(!toggleLogin);
         }
       } catch (err) {
         toast.error(err.message);
@@ -57,9 +140,7 @@ const Form = () => {
       if (res?.data) {
         toast.success("You are successfully logged in");
         localStorage.setItem("User", JSON.stringify(res?.data?.login));
-        setTimeout(() => {
-          navigate("/welcome");
-        }, 5000);
+        navigate("/welcome");
       }
     } catch (err) {
       toast.error(err.message);
@@ -68,86 +149,87 @@ const Form = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="form-container">
-        <div className="menu-action">
-          <Button
-            onClick={() => setToggleLogin(!toggleLogin)}
-            title={`Switch to ${toggleLogin ? "Login" : "Sign up"}`}
-          />
+        <div className="form-wrapper">
+          <h2 className="app-header">
+            {toggleLogin ? "Sign up to our App" : "Login your details"}
+          </h2>
+          <form>
+            {toggleLogin ? (
+              <>
+                {inputFormData.map((formData) => {
+                  const {
+                    id,
+                    inputName,
+                    labelName,
+                    inputType,
+                    label,
+                    required,
+                    value,
+                    onChange,
+                  } = formData;
+                  return (
+                    <div className="input-field" key={id}>
+                      <Label labelName={labelName} label={label} />
+                      <Input
+                        name={inputName}
+                        inputType={inputType}
+                        required={required}
+                        value={value}
+                        onChange={onChange}
+                      />
+                    </div>
+                  );
+                })}
+              </>
+            ) : (
+              <>
+                {loginFormData.map((formData) => {
+                  const {
+                    id,
+                    inputName,
+                    inputType,
+                    labelName,
+                    label,
+                    required,
+                    value,
+                    onChange,
+                  } = formData;
+                  return (
+                    <div className="input-field" key={id}>
+                      <Label labelName={labelName} label={label} />
+                      <Input
+                        name={inputName}
+                        inputType={inputType}
+                        required={required}
+                        value={value}
+                        onChange={onChange}
+                      />
+                    </div>
+                  );
+                })}
+              </>
+            )}
+
+            <Button
+              title={toggleLogin ? "Sign Up" : "Login"}
+              onClick={toggleLogin ? signUpFunc : loginFunc}
+            />
+          </form>
+          <div className="switch-auth">
+            {toggleLogin ? (
+              <small>
+                Already have an account ?
+                <span onClick={() => setToggleLogin(false)}>&nbsp; Login</span>
+              </small>
+            ) : (
+              <small>
+                Don't have an account ?
+                <span onClick={() => setToggleLogin(true)}>&nbsp; Register</span>
+              </small>
+            )}
+          </div>
         </div>
-
-        <h2 className="app-header">
-          {toggleLogin ? "Sign up to our App" : "Login"}
-        </h2>
-        <form>
-          {toggleLogin ? (
-            <>
-              <Label labelName="name" label="Name" />
-              <Input
-                name="name"
-                inputType="text"
-                required={true}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <Label labelName="email" label="Email" />
-              <Input
-                name="email"
-                inputType="email"
-                required={true}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Label labelName="name" label="Password" />
-              <Input
-                name="password"
-                inputType="password"
-                required={true}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <Label labelName="username" label="Username" />
-              <Input
-                name="username"
-                inputType="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <Label labelName="phoneNumber" label="Phone Number" />
-              <Input
-                name="phoneNumber"
-                inputType="text"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </>
-          ) : (
-            <>
-              <Label labelName="email" label="Email" />
-              <Input
-                name="email"
-                inputType="email"
-                required={true}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Label labelName="name" label="Password" />
-              <Input
-                name="password"
-                inputType="password"
-                required={true}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </>
-          )}
-
-          <Button
-            title={toggleLogin ? "Sign Up" : "Login"}
-            onClick={toggleLogin ? signUpFunc : loginFunc}
-          />
-        </form>
       </div>
     </>
   );
