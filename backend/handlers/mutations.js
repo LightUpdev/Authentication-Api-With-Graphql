@@ -10,13 +10,17 @@ export const mutations = new GraphQLObjectType({
     signUp: {
       type: userType,
       args: {
-        name: { type: GraphQLNonNull(GraphQLString) },
+        firstName: { type: GraphQLNonNull(GraphQLString) },
+        lastName: { type: GraphQLNonNull(GraphQLString) },
         email: { type: GraphQLNonNull(GraphQLString) },
         password: { type: GraphQLNonNull(GraphQLString) },
         username: { type: GraphQLNonNull(GraphQLString) },
-        phoneNumber: { type: GraphQLNonNull(GraphQLString) },
+        phoneNumber: { type: GraphQLString },
       },
-      async resolve(parent, { name, email, password, username, phoneNumber }) {
+      async resolve(
+        parent,
+        { firstName, lastName, email, password, username, phoneNumber }
+      ) {
         try {
           // validate email
           const emailRegex = new RegExp(
@@ -51,7 +55,8 @@ export const mutations = new GraphQLObjectType({
               return new Error("User already exists please login");
             }
             const newUser = new User({
-              name,
+              firstName,
+              lastName,
               email,
               password: encryptedPassword,
               username,
