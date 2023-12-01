@@ -153,7 +153,7 @@ const Form = () => {
       <div className="form-container">
         <div className="form-wrapper">
           <h2 className="app-header">
-            {toggleLogin ? "Sign up to our App" : "Login your details"}
+            {toggleLogin ? "Sign up with light-dev" : "Login your details"}
           </h2>
           <form>
             {toggleLogin ? (
