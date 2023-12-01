@@ -3,7 +3,6 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  padding: 15px 0;
   height: 100vh;
   margin: auto auto;
   background-image: url("../public/assets/form-bg-image.png");
@@ -19,8 +18,8 @@ form {
   margin: auto auto;
 }
 
-.form-div{
-  background-color: rgba(0,0 ,0 ,0.78);
+.form-div {
+  background-color: rgba(0, 0, 0, 0.78);
   padding: 25px;
   margin: auto auto;
   width: fit-content;
@@ -30,7 +29,6 @@ form {
   align-self: center;
   border-radius: 20px;
 }
-
 .app-header {
   font-size: 1.2rem;
   font-weight: 400;
@@ -39,14 +37,14 @@ form {
   text-align: center;
 }
 input {
-  padding: 8px;
-  margin: 0 0 5px 0;
+  padding: 10px;
+  margin: 0 0 12px 0;
   border-radius: 10px;
   border: none;
 }
 form button {
   padding: 10px;
-  margin: 15px 0;
+  margin: 18px 0;
   color: black;
   background-color: #89cff0;
   border: none;
@@ -88,7 +86,7 @@ label {
   background-color: #89cff0;
   height: 30px;
   border: 0;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: bold;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
   cursor: pointer;
@@ -117,7 +115,7 @@ label {
   color: #89cff0;
   cursor: pointer;
 }
-.welcome-page-header{
+.welcome-page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -140,6 +138,11 @@ label {
   }
   .form-wrapper {
     align-self: center;
-    margin: 0 50px 0 50px;
+  }
+  .form-div {
+    margin-right: 100px;
+  }
+  input {
+    margin-bottom: 9px;
   }
 }

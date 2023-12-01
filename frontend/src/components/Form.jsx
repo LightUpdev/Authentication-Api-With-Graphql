@@ -151,89 +151,92 @@ const Form = () => {
     <>
       <ToastContainer />
       <div className="form-container">
-        <div className="form-div"> <div className="form-wrapper">
-          <h2 className="app-header">
-            {toggleLogin ? "Sign up with light-dev" : "Login your details"}
-          </h2>
-          <form>
-            {toggleLogin ? (
-              <>
-                {inputFormData.map((formData) => {
-                  const {
-                    id,
-                    inputName,
-                    labelName,
-                    inputType,
-                    label,
-                    required,
-                    value,
-                    onChange,
-                  } = formData;
-                  return (
-                    <div className="input-field" key={id}>
-                      <Label labelName={labelName} label={label} />
-                      <Input
-                        name={inputName}
-                        inputType={inputType}
-                        required={required}
-                        value={value}
-                        onChange={onChange}
-                      />
-                    </div>
-                  );
-                })}
-              </>
-            ) : (
-              <>
-                {loginFormData.map((formData) => {
-                  const {
-                    id,
-                    inputName,
-                    inputType,
-                    labelName,
-                    label,
-                    required,
-                    value,
-                    onChange,
-                  } = formData;
-                  return (
-                    <div className="input-field" key={id}>
-                      <Label labelName={labelName} label={label} />
-                      <Input
-                        name={inputName}
-                        inputType={inputType}
-                        required={required}
-                        value={value}
-                        onChange={onChange}
-                      />
-                    </div>
-                  );
-                })}
-              </>
-            )}
+        <div className="form-div">
+          <div className="form-wrapper">
+            <h2 className="app-header">
+              {toggleLogin ? "Sign up with light-dev" : "Login your details"}
+            </h2>
+            <form>
+              {toggleLogin ? (
+                <>
+                  {inputFormData.map((formData) => {
+                    const {
+                      id,
+                      inputName,
+                      labelName,
+                      inputType,
+                      label,
+                      required,
+                      value,
+                      onChange,
+                    } = formData;
+                    return (
+                      <div className="input-field" key={id}>
+                        <Label labelName={labelName} label={label} />
+                        <Input
+                          name={inputName}
+                          inputType={inputType}
+                          required={required}
+                          value={value}
+                          onChange={onChange}
+                        />
+                      </div>
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  {loginFormData.map((formData) => {
+                    const {
+                      id,
+                      inputName,
+                      inputType,
+                      labelName,
+                      label,
+                      required,
+                      value,
+                      onChange,
+                    } = formData;
+                    return (
+                      <div className="input-field" key={id}>
+                        <Label labelName={labelName} label={label} />
+                        <Input
+                          name={inputName}
+                          inputType={inputType}
+                          required={required}
+                          value={value}
+                          onChange={onChange}
+                        />
+                      </div>
+                    );
+                  })}
+                </>
+              )}
 
-            <Button
-              title={toggleLogin ? "Sign Up" : "Login"}
-              onClick={toggleLogin ? signUpFunc : loginFunc}
-            />
-          </form>
-          <div className="switch-auth">
-            {toggleLogin ? (
-              <small>
-                Already have an account ?
-                <span onClick={() => setToggleLogin(false)}>&nbsp; Login</span>
-              </small>
-            ) : (
-              <small>
-                Don't have an account ?
-                <span onClick={() => setToggleLogin(true)}>
-                  &nbsp; Register
-                </span>
-              </small>
-            )}
+              <Button
+                title={toggleLogin ? "Sign Up" : "Login"}
+                onClick={toggleLogin ? signUpFunc : loginFunc}
+              />
+            </form>
+            <div className="switch-auth">
+              {toggleLogin ? (
+                <small>
+                  Already have an account ?
+                  <span onClick={() => setToggleLogin(false)}>
+                    &nbsp; Login
+                  </span>
+                </small>
+              ) : (
+                <small>
+                  Don't have an account ?
+                  <span onClick={() => setToggleLogin(true)}>
+                    &nbsp; Register
+                  </span>
+                </small>
+              )}
+            </div>
           </div>
-        </div></div>
-       
+        </div>
       </div>
     </>
   );
