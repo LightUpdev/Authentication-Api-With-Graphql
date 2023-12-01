@@ -18,7 +18,9 @@ form {
   justify-content: center;
   margin: auto auto;
 }
-.form-wrapper {
+
+.form-div{
+  background-color: rgba(0,0 ,0 ,0.78);
   padding: 25px;
   margin: auto auto;
   width: fit-content;
@@ -27,7 +29,6 @@ form {
   align-items: center;
   align-self: center;
   border-radius: 20px;
-  background-color: black;
 }
 
 .app-header {

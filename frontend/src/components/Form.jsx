@@ -151,7 +151,7 @@ const Form = () => {
     <>
       <ToastContainer />
       <div className="form-container">
-        <div className="form-wrapper">
+        <div className="form-div"> <div className="form-wrapper">
           <h2 className="app-header">
             {toggleLogin ? "Sign up with light-dev" : "Login your details"}
           </h2>
@@ -232,7 +232,8 @@ const Form = () => {
               </small>
             )}
           </div>
-        </div>
+        </div></div>
+       
       </div>
     </>
   );
