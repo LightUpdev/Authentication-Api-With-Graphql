@@ -18,10 +18,10 @@ const WelcomePage = () => {
 
       <h1>About The Project</h1>
       <p>
-        You are welcome on board {user?.name.toLowerCase()}, this is an
+        You are welcome on board {user?.firstName.toLowerCase()}, this is an
         application to show <mark>Lenity Stephen</mark> skill on building{" "}
-        <b>sign up and login authentication</b> using both <b>front end and backend
-        languages.</b> 
+        <b>sign up and login authentication</b> using both{" "}
+        <b>front end and backend languages.</b>
       </p>
       <p> Below are the languages and libraries use for this project:</p>
       <div className="skill-list">
