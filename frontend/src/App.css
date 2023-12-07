@@ -60,43 +60,12 @@ label {
   font-size: 10px;
   font-weight: 500;
 }
-.welcome-page {
-  padding: 15px 10px;
-  margin: 15px 30px;
-}
-.welcome-page h1 {
-  font-size: 1.5rem;
-  padding: 15px 10px;
-  margin: 15px 10px;
-  align-self: center;
-  justify-self: center;
-  text-align: center;
-}
-.welcome-page p {
-  padding: 5px 10px;
-  margin: 5px 10px;
-  align-self: center;
-  justify-self: center;
-  font-size: 20px;
+.btn-89cff0 {
+  background: #89cff0 !important;
+  color: black !important;
+  font-weight: 500 !important;
 }
 
-.welcome-page .log-out {
-  color: white;
-  padding: 10px;
-  background-color: #89cff0;
-  height: 30px;
-  border: 0;
-  font-size: 0.9rem;
-  font-weight: bold;
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-  align-self: center;
-  align-items: center;
-}
-
-.welcome-page .skill-list {
-  margin: 0 20px;
-}
 .input-field {
   display: flex;
   flex-direction: column;
@@ -115,19 +84,71 @@ label {
   color: #89cff0;
   cursor: pointer;
 }
-.welcome-page-header {
+a {
+  text-decoration: none !important;
+  color: black !important;
+}
+
+.err {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto auto;
+}
+.err small {
+  color: red;
+  word-wrap: wrap;
+}
+.nav-bar {
+  padding: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.nav-links ul {
+  display: inline-flex;
+  list-style: none;
+  gap: 5rem;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.nav-links ul li {
+  color: black;
+  font-weight: 500;
+}
+.user-action {
+  display: flex;
+  gap: 1.3rem;
+  justify-content: center;
+  align-items: center;
+}
+.user-action .user-name {
+  font-weight: 700;
+}
+.welcome-container {
+  height: 100vh;
+}
+.validation-wrapper {
+  display: grid;
+  align-self: center;
+  padding: 0px;
+}
+.validation-wrapper div small {
+  font-size: 12px;
+  word-wrap: nowrap;
+}
+.font-danger{
+  color: hsl(0, 100%, 74%);
+}
+.font-success{
+  color: rgb(85, 255, 7);
 }
 
 @media only screen and (min-width: 768px) {
   .app-header {
     font-size: 1.5rem;
   }
-  .welcome-page h1 {
-    font-size: 2rem;
-  }
+
   .form-container {
     display: flex;
     height: 100vh;
@@ -144,5 +165,13 @@ label {
   }
   input {
     margin-bottom: 9px;
+  }
+  .validation-wrapper {
+    display: grid;
+    justify-items: center;
+    justify-content: center;
+    align-self: center;
+    margin-right: 3.9rem;
+    padding: 10px;
   }
 }

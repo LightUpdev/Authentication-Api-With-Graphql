@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const WelcomePage = () => {
   const navigate = useNavigate();
@@ -9,44 +9,37 @@ const WelcomePage = () => {
   };
   const data = localStorage.getItem("User");
   const user = JSON.parse(data);
-  console.log(user);
   return (
-    <div className="welcome-page">
-      <div className="welcome-page-header">
-        <h3>{user?.firstName.toUpperCase()}</h3>
-        <button className="log-out" onClick={logOut}>
-          Log out
-        </button>
+    <>
+      <div className="container-fluid welcome-container">
+        <div className="container- nav-bar">
+          <div className="nav-logo">
+            <Link>LOGO</Link>
+          </div>
+          <div className="nav-links">
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="https://github.com/LightUpdev">Github</Link>
+              </li>
+              <li>
+                <Link to="#stack">Stack</Link>
+              </li>
+            </ul>
+          </div>
+          <div className="user-action">
+            <div className="user-name">{user?.firstName}</div>
+            <div className="log-out">
+              <div className="btn btn-primary" onClick={() => logOut()}>
+                Logout
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <h1>About The Project</h1>
-      <p>
-        This is an application showcasing Lenity Stephen skill on building
-        <b>sign up and login authentication</b> using both
-        <b> front end and backend languages.</b>
-      </p>
-      <p> Below are the languages and libraries use for this project:</p>
-      <div className="skill-list">
-        <h3>Backend</h3>
-        <ol>
-          <li>Node</li>
-          <li>Express</li>
-          <li>GraphQl</li>
-          <li>Crypto Js</li>
-          <li>MongoDb</li>
-          <li>Cors</li>
-        </ol>
-        <h3>Frontend</h3>
-        <ol>
-          <li>JavaScript</li>
-          <li>React JS</li>
-          <li>React-router-dom</li>
-          <li>Apollo Client</li>
-          <li>React-Toastify</li>
-          <li>GraphQl</li>
-        </ol>
-      </div>
-    </div>
+    </>
   );
 };
 
