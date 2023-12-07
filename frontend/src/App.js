@@ -4,6 +4,7 @@ import Form from "./components/Form";
 import WelcomePage from "./pages/WelcomePage";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   const data = localStorage.getItem("User");
