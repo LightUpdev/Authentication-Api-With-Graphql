@@ -1,8 +1,7 @@
 import { GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
 import { userType } from "../schema/index.js";
 import { User } from "../Model/index.js";
-import CryptoJS from "crypto-js"; 
-
+import CryptoJS from "crypto-js";
 
 export const mutations = new GraphQLObjectType({
   name: "mutations",
@@ -22,6 +21,17 @@ export const mutations = new GraphQLObjectType({
         { firstName, lastName, email, password, username, phoneNumber }
       ) {
         try {
+          // check if fields are empty
+          if (
+            firstName === "" &&
+            lastName === "" &&
+            email === "" &&
+            password === "" &&
+            username === "" &&
+            phoneNumber === ""
+          ) {
+            return new Error("Fields can not be empty");
+          }
           // validate email
           const emailRegex = new RegExp(
             /^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/,

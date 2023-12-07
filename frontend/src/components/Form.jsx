@@ -6,6 +6,7 @@ import Button from "./Button";
 import { useMutation } from "@apollo/client";
 import { LOGIN, SIGN_UP } from "../graphql/mutations";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Form = () => {
   const [firstName, setFirstName] = useState("");
@@ -223,7 +224,11 @@ const Form = () => {
   return (
     <>
       <div className="form-container">
-        <div className="form-div">
+        <motion.div
+          whileInView={{ x: [150, 0], opacity: [0, 1] }}
+          transition={{ duration: 2.5 }}
+          className="form-div"
+        >
           <div className="form-wrapper">
             <h2 className="app-header">
               {toggleLogin ? "Sign up with light-dev" : "Login your details"}
@@ -328,64 +333,59 @@ const Form = () => {
               )}
             </div>
           </div>
-          
-        </div>
+        </motion.div>
         {password.length > 0 && (
-              <div className="validation-wrapper">
-                <div>
-                  <small
-                    className={`mx-2 ${
-                      passwordLength ? "font-success" : "font-danger"
-                    }`}
-                  >
-                    <BsCheckCircle
-                      className={` ${
-                        passwordLength ? "font-success" : "font-danger"
-                      }`}
-                    />
-                    At least 8 characters
-                  </small>
-                  <small
-                    className={`mx-2 ${
-                      hasSpecialChar ? "font-success" : "font-danger"
-                    }`}
-                  >
-                    <BsCheckCircle
-                      className={` ${
-                        hasSpecialChar ? "font-success" : "font-danger"
-                      }`}
-                    />
-                    Has special characters
-                  </small>
-                </div>
-                <div>
-                  <small
-                    className={`mx-2 ${
-                      hasUppercase ? "font-success" : "font-danger"
-                    }`}
-                  >
-                    <BsCheckCircle
-                      className={` ${
-                        hasUppercase ? "font-success" : "font-danger"
-                      }`}
-                    />
-                    Has uppercase letter
-                  </small>
-                  <small
-                    className={`mx-2 ${
-                      hasNumber ? "font-success" : "font-danger"
-                    }`}
-                  >
-                    <BsCheckCircle
-                      className={` ${
-                        hasNumber ? "font-success" : "font-danger"
-                      }`}
-                    />
-                    Has number characters
-                  </small>
-                </div>
-              </div>
-            )}
+          <div className="validation-wrapper">
+            <div>
+              <small
+                className={`mx-2 ${
+                  passwordLength ? "font-success" : "font-danger"
+                }`}
+              >
+                <BsCheckCircle
+                  className={` ${
+                    passwordLength ? "font-success" : "font-danger"
+                  }`}
+                />
+                At least 8 characters
+              </small>
+              <small
+                className={`mx-2 ${
+                  hasSpecialChar ? "font-success" : "font-danger"
+                }`}
+              >
+                <BsCheckCircle
+                  className={` ${
+                    hasSpecialChar ? "font-success" : "font-danger"
+                  }`}
+                />
+                Has special characters
+              </small>
+            </div>
+            <div>
+              <small
+                className={`mx-2 ${
+                  hasUppercase ? "font-success" : "font-danger"
+                }`}
+              >
+                <BsCheckCircle
+                  className={` ${
+                    hasUppercase ? "font-success" : "font-danger"
+                  }`}
+                />
+                Has uppercase letter
+              </small>
+              <small
+                className={`mx-2 ${hasNumber ? "font-success" : "font-danger"}`}
+              >
+                <BsCheckCircle
+                  className={` ${hasNumber ? "font-success" : "font-danger"}`}
+                />
+                Has number characters
+              </small>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
