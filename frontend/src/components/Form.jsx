@@ -165,9 +165,7 @@ const Form = ({ props }) => {
                 </small>
               )}
             </div>
-          </div>
-        </motion.div>
-        {props.password.length > 0 && (
+            {props.password.length > 0 && (
           <div className="validation-wrapper">
             <div>
               <small
@@ -223,6 +221,9 @@ const Form = ({ props }) => {
             </div>
           </div>
         )}
+          </div>
+        </motion.div>
+        
       </div>
     </>
   );
