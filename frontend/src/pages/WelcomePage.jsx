@@ -19,8 +19,8 @@ const WelcomePage = ({ props }) => {
   const user = JSON.parse(data);
   return (
     <>
-      <div className="container-fluid welcome-container" >
-        <div className="container welcome" >
+      <div className="container-fluid welcome-container">
+        <div className="container nav">
           <div className="nav-logo">
             <Link>LOGO</Link>
           </div>
@@ -97,6 +97,7 @@ const WelcomePage = ({ props }) => {
             )}
           </div>
         </div>
+        
       </div>
     </>
   );

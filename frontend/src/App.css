@@ -86,7 +86,7 @@ label {
 }
 a {
   text-decoration: none !important;
-  color: black !important;
+  color: white !important;
 }
 
 .err {
@@ -99,7 +99,7 @@ a {
   color: red;
   word-wrap: wrap;
 }
-.welcome {
+.nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -109,7 +109,7 @@ a {
   margin-top: 18px;
 }
 .nav-links ul li {
-  color: black;
+  color: white;
   font-weight: 500;
 }
 .user-action {
@@ -120,9 +120,18 @@ a {
 }
 .user-action .user-name {
   font-weight: 700;
+  color: white !important;
+}
+.mobile-user-name {
+  font-weight: 400;
+  color: white !important;
 }
 .welcome-container {
   height: 100vh;
+  background-image: url("../public/assets/welcome-hero.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 .validation-wrapper {
   display: grid;
@@ -139,7 +148,7 @@ a {
 .font-success {
   color: rgb(85, 255, 7);
 }
-.welcome .nav-links ul {
+.nav .nav-links ul {
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -148,14 +157,14 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
-  .welcome {
+  .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: absolute;
     right: 0;
   }
-  .welcome .nav-links-lg {
+  .nav .nav-links-lg {
     display: none;
   }
   .user-action {
@@ -179,14 +188,14 @@ a {
     text-align: center;
   }
   .side-bar-wrapper {
-    border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 13px 0 0 13px;
     box-shadow: 20px 8px 12px rgba(0, 0, 0, 0.5);
-
-    width: 220px;
+    background-color: black;
+    width: 226px;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    padding: 12px;
   }
 
   .side-bar-wrapper .side-bar-close-icon {
@@ -245,10 +254,10 @@ a {
     margin-top: 18px;
   }
   .nav-links-lg ul li {
-    color: black;
+    color: white;
     font-weight: 500;
   }
-  .welcome .nav-links-lg ul {
+  .nav .nav-links-lg ul {
     display: flex;
     flex-direction: row;
     gap: 6rem;
