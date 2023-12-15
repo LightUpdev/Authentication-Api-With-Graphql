@@ -1,225 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Label from "./Label";
 import Input from "./Input";
 import { BsCheckCircle } from "react-icons/bs";
 import Button from "./Button";
-import { useMutation } from "@apollo/client";
-import { LOGIN, SIGN_UP } from "../graphql/mutations";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const Form = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [toggleLogin, setToggleLogin] = useState(true);
-  const [isErrMsg, setIsErrMsg] = useState(false);
-  const [error, setError] = useState("");
-  const [passwordLength, setPasswordLength] = useState(false);
-  const [hasSpecialChar, setHasSpecialChar] = useState(false);
-  const [hasNumber, setHasNumber] = useState(false);
-  const [hasUppercase, setHasUppercase] = useState(false);
-
+const Form = ({ props }) => {
   // CHECK IF PASSWORD HAVE SPECIAL CHARACTER
   useEffect(() => {
+    // eslint-disable-next-line no-useless-escape
     const specialCharacters = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    if (!specialCharacters.test(password)) {
-      setHasSpecialChar(false);
+    if (!specialCharacters.test(props.password)) {
+      props.setHasSpecialChar(false);
     } else {
-      setHasSpecialChar(true);
+      props.setHasSpecialChar(true);
     }
-  }, [password]);
+  }, [props.password, props]);
 
   // CHECK LENGTH OF PASSWORD
   useEffect(() => {
-    if (password.length >= 8) {
-      setPasswordLength(true);
+    if (props.password.length >= 8) {
+      props.setPasswordLength(true);
     } else {
-      setPasswordLength(false);
+      props.setPasswordLength(false);
     }
-  }, [password]);
+  }, [props.password, props]);
 
   // CHECK IF PASSWORD HAVE NUMBER
   useEffect(() => {
     var numbers = /[0-9]/;
 
-    if (numbers.test(password)) {
-      setHasNumber(true);
+    if (numbers.test(props.password)) {
+      props.setHasNumber(true);
     } else {
-      setHasNumber(false);
+      props.setHasNumber(false);
     }
-  }, [password]);
+  }, [props.password, props]);
 
   // CHECK IF PASSWORD HAVE UPPERCASE
   useEffect(() => {
     var uppercase = /[A-Z]/;
 
-    if (uppercase.test(password)) {
-      setHasUppercase(true);
+    if (uppercase.test(props.password)) {
+      props.setHasUppercase(true);
     } else {
-      setHasUppercase(false);
+      props.setHasUppercase(false);
     }
-  }, [password]);
+  }, [props.password, props]);
 
-  // Form inputs
-  const inputFormData = [
-    {
-      id: 1,
-      inputName: "firstName",
-      labelName: "firstName",
-      label: "First Name",
-      inputType: "text",
-      required: true,
-      value: firstName,
-      onChange: (e) => {
-        setFirstName(e.target.value);
-      },
-    },
-    {
-      id: 2,
-      inputName: "lastName",
-      labelName: "lastName",
-      label: "Last Name",
-      inputType: "text",
-      required: true,
-      value: lastName,
-      onChange: (e) => {
-        setLastName(e.target.value);
-      },
-    },
-    {
-      id: 3,
-      inputName: "email",
-      labelName: "email",
-      inputType: "email",
-      label: "Email",
-      required: true,
-      value: email,
-      onChange: (e) => {
-        setEmail(e.target.value);
-      },
-    },
-    {
-      id: 4,
-      inputName: "password",
-      labelName: "password",
-      inputType: "password",
-      label: "Password",
-      required: true,
-      value: password,
-      onChange: (e) => {
-        setPassword(e.target.value);
-      },
-    },
-    {
-      id: 5,
-      inputName: "username",
-      labelName: "username",
-      inputType: "text",
-      label: "Username",
-      required: true,
-      value: username,
-      onChange: (e) => {
-        setUsername(e.target.value);
-      },
-    },
-    {
-      id: 6,
-      inputName: "phoneNumber",
-      labelName: "phoneNumber",
-      label: "Phone Number",
-      inputType: "text",
-      required: false,
-      value: phoneNumber,
-      onChange: (e) => {
-        setPhoneNumber(e.target.value);
-      },
-    },
-  ];
-
-  const loginFormData = inputFormData.filter(
+  const loginFormData = props.inputFormData.filter(
     (val) => val.inputName === "email" || val.inputName === "password"
   );
-
-  const navigate = useNavigate();
-
-  const [signUp] = useMutation(SIGN_UP);
-  const [login] = useMutation(LOGIN);
-
-  const signUpFunc = async (e) => {
-    e.preventDefault();
-    if (firstName && lastName && email && password && username && phoneNumber) {
-      try {
-        const res = await signUp({
-          variables: {
-            firstName,
-            lastName,
-            email,
-            password,
-            username,
-            phoneNumber,
-          },
-        });
-        if (res?.data) {
-          localStorage.setItem("User", JSON.stringify(res?.data?.signUp));
-          setEmail("");
-          setFirstName("");
-          setLastName("");
-          setPassword("");
-          setPhoneNumber("");
-          setUsername("");
-          setToggleLogin(!toggleLogin);
-        }
-      } catch (err) {
-        setIsErrMsg(true);
-        setError(err.message);
-        setTimeout(() => {
-          setIsErrMsg(false);
-          setError("");
-        }, 8000);
-      }
-    } else {
-      setIsErrMsg(true);
-      setError("Fields must be filled");
-      setTimeout(() => {
-        setIsErrMsg(false);
-        setError("");
-      }, 3000);
-    }
-  };
-
-  const loginFunc = async (e) => {
-    e.preventDefault();
-    if (password && email) {
-      try {
-        const res = await login({
-          variables: { email, password },
-        });
-
-        if (res?.data) {
-          localStorage.setItem("User", JSON.stringify(res?.data?.login));
-          navigate("/welcome");
-        }
-      } catch (err) {
-        setIsErrMsg(true);
-        setError(err.message);
-        setTimeout(() => {
-          setIsErrMsg(false);
-          setError("");
-        }, 3000);
-      }
-    } else {
-      setIsErrMsg(true);
-      setError("Fields must be filled");
-      setTimeout(() => {
-        setIsErrMsg(false);
-        setError("");
-      }, 3000);
-    }
-  };
 
   return (
     <>
@@ -231,12 +62,14 @@ const Form = () => {
         >
           <div className="form-wrapper">
             <h2 className="app-header">
-              {toggleLogin ? "Sign up with light-dev" : "Login your details"}
+              {props.toggleLogin
+                ? "Sign up with light-dev"
+                : "Login your details"}
             </h2>
             <form>
-              {toggleLogin ? (
+              {props.toggleLogin ? (
                 <>
-                  {inputFormData.map((formData) => {
+                  {props.inputFormData.map((formData) => {
                     const {
                       id,
                       inputName,
@@ -296,22 +129,22 @@ const Form = () => {
               )}
 
               <Button
-                title={toggleLogin ? "Sign Up" : "Login"}
-                onClick={toggleLogin ? signUpFunc : loginFunc}
+                title={props.toggleLogin ? `${props.loading ?"Loading...":"Sign Up"}` : `${props.loading ?"Loading...":"Login"}`}
+                onClick={props.toggleLogin ? props.signUpFunc : props.loginFunc}
               />
             </form>
             <div className="err">
-              <small>{isErrMsg && error}</small>
+              <small>{props.isErrMsg && props.error}</small>
             </div>
             <div className="switch-auth">
-              {toggleLogin ? (
+              {props.toggleLogin ? (
                 <small>
                   Already have an account ?
                   <span
                     onClick={() => {
-                      setToggleLogin(false);
-                      setEmail("");
-                      setPassword("");
+                      props.setToggleLogin(false);
+                      props.setEmail("");
+                      props.setPassword("");
                     }}
                   >
                     &nbsp; Login
@@ -322,9 +155,9 @@ const Form = () => {
                   Don't have an account ?
                   <span
                     onClick={() => {
-                      setToggleLogin(true);
-                      setEmail("");
-                      setPassword("");
+                      props.setToggleLogin(true);
+                      props.setEmail("");
+                      props.setPassword("");
                     }}
                   >
                     &nbsp; Register
@@ -334,29 +167,29 @@ const Form = () => {
             </div>
           </div>
         </motion.div>
-        {password.length > 0 && (
+        {props.password.length > 0 && (
           <div className="validation-wrapper">
             <div>
               <small
                 className={`mx-2 ${
-                  passwordLength ? "font-success" : "font-danger"
+                  props.passwordLength ? "font-success" : "font-danger"
                 }`}
               >
                 <BsCheckCircle
                   className={` ${
-                    passwordLength ? "font-success" : "font-danger"
+                    props.passwordLength ? "font-success" : "font-danger"
                   }`}
                 />
                 At least 8 characters
               </small>
               <small
                 className={`mx-2 ${
-                  hasSpecialChar ? "font-success" : "font-danger"
+                  props.hasSpecialChar ? "font-success" : "font-danger"
                 }`}
               >
                 <BsCheckCircle
                   className={` ${
-                    hasSpecialChar ? "font-success" : "font-danger"
+                    props.hasSpecialChar ? "font-success" : "font-danger"
                   }`}
                 />
                 Has special characters
@@ -365,21 +198,25 @@ const Form = () => {
             <div>
               <small
                 className={`mx-2 ${
-                  hasUppercase ? "font-success" : "font-danger"
+                  props.hasUppercase ? "font-success" : "font-danger"
                 }`}
               >
                 <BsCheckCircle
                   className={` ${
-                    hasUppercase ? "font-success" : "font-danger"
+                    props.hasUppercase ? "font-success" : "font-danger"
                   }`}
                 />
                 Has uppercase letter
               </small>
               <small
-                className={`mx-2 ${hasNumber ? "font-success" : "font-danger"}`}
+                className={`mx-2 ${
+                  props.hasNumber ? "font-success" : "font-danger"
+                }`}
               >
                 <BsCheckCircle
-                  className={` ${hasNumber ? "font-success" : "font-danger"}`}
+                  className={` ${
+                    props.hasNumber ? "font-success" : "font-danger"
+                  }`}
                 />
                 Has number characters
               </small>
