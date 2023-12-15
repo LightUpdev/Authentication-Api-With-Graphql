@@ -99,18 +99,14 @@ a {
   color: red;
   word-wrap: wrap;
 }
-.nav-bar {
-  padding: 15px;
+.welcome {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 .nav-links ul {
-  display: inline-flex;
   list-style: none;
-  gap: 5rem;
-  align-items: center;
-  margin-top: 1.5rem;
+  margin-top: 18px;
 }
 .nav-links ul li {
   color: black;
@@ -137,16 +133,86 @@ a {
   font-size: 12px;
   word-wrap: nowrap;
 }
-.font-danger{
+.font-danger {
   color: hsl(0, 100%, 74%);
 }
-.font-success{
+.font-success {
   color: rgb(85, 255, 7);
+}
+.welcome .nav-links ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    right: 0;
+  }
+  .welcome .nav-links-lg {
+    display: none;
+  }
+  .user-action {
+    display: none;
+  }
+  .nav-logo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+  }
+  .hamburger {
+    background-color: aqua;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .side-bar-wrapper {
+    border: 2px solid black;
+    border-radius: 10px;
+    box-shadow: 20px 8px 12px rgba(0, 0, 0, 0.5);
+
+    width: 220px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .side-bar-wrapper .side-bar-close-icon {
+    position: fixed;
+    top: 2px;
+    right: 10px;
+    color: red;
+    font-size: 1.2rem;
+  }
+  .mobile-side-screen {
+    display: flex;
+    flex-direction: column;
+    transition: all 3s ease-in-out;
+    float: right;
+  }
 }
 
 @media only screen and (min-width: 768px) {
   .app-header {
     font-size: 1.5rem;
+  }
+  .hamburger {
+    display: none;
+  }
+  .mobile-side-screen {
+    display: none;
   }
 
   .form-container {
@@ -173,5 +239,18 @@ a {
     align-self: center;
     margin-right: 3.9rem;
     padding: 10px;
+  }
+  .nav-links-lg ul {
+    list-style: none;
+    margin-top: 18px;
+  }
+  .nav-links-lg ul li {
+    color: black;
+    font-weight: 500;
+  }
+  .welcome .nav-links-lg ul {
+    display: flex;
+    flex-direction: row;
+    gap: 6rem;
   }
 }
